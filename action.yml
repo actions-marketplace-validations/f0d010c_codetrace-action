@@ -1,0 +1,46 @@
+name: 'CodeTrace Changelog Generator'
+description: 'Automatically generate AI-powered changelogs from your commits using CodeTrace'
+author: 'CodeTrace'
+
+branding:
+  icon: 'book-open'
+  color: 'purple'
+
+inputs:
+  api-key:
+    description: 'Your CodeTrace API key (store as a repository secret)'
+    required: true
+  repository-id:
+    description: 'The CodeTrace repository ID to generate a changelog for'
+    required: true
+  from-ref:
+    description: 'Start ref (tag, branch, or commit SHA)'
+    required: true
+  to-ref:
+    description: 'End ref (tag, branch, or commit SHA). Defaults to HEAD'
+    required: false
+    default: 'HEAD'
+  output-format:
+    description: 'Output format: markdown | plaintext | html | json'
+    required: false
+    default: 'markdown'
+  output-file:
+    description: 'Write the changelog to this file path (optional)'
+    required: false
+    default: ''
+  api-url:
+    description: 'CodeTrace API base URL'
+    required: false
+    default: 'https://codetrace.eu'
+
+outputs:
+  changelog:
+    description: 'The generated changelog text'
+  prompt-tokens:
+    description: 'Number of prompt tokens used'
+  completion-tokens:
+    description: 'Number of completion tokens used'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
